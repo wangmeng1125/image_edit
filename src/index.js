@@ -1,16 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// @flow
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import React from "react"
+import ReactDOM from "react-dom"
+import Theme from "./Theme"
+import DemoSite from "./DemoSite"
+import LandingPage from "./LandingPage"
+import "./site.css"
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const Site = () => {
+  const path = window.location.pathname
+    .replace(/\/$/, "")
+    .split("/")
+    .slice(-1)[0]
+  return <Theme>{path === "demo" ? <DemoSite /> : <LandingPage />}</Theme>
+}
+
+ReactDOM.render(<Site />, document.getElementById("root"))
